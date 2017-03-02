@@ -1,25 +1,28 @@
 package codigocesar;
 import java.util.Scanner;
 /**
- * @author MLeandroCardenas
+ * @author MLeandroCardenas,Edgar Andres Krejci Bautista
  * @version 2017.28.02
  * 
  */
 public class CodigoCesar {
+    
     char []alfabeto={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     Scanner teclado= new Scanner(System.in); 
     private int clave=0;    //Variables globales
     private char []letra; 
     private String mensaje;  
-    //Clase principal main donde se muestra el menu de opciones
+    /**
+     * Clase principal main donde se muestra el menu de opciones
+    */
     public static void main(String[] args) {
       System.out.println("MENU DE OPCIONES:\n 1.Cifrar: \n 2.Descifrar:\n");
-      CodigoCesar cesar = new CodigoCesar();  //Creacion del objeto de la clase 
-      cesar.menu(); // invocacion del metodo.
+      CodigoCesar cesar = new CodigoCesar();  /**Creacion del objeto de la clase*/ 
+      cesar.menu(); /** invocacion del metodo.*/
     }
-    // menu donde se llaman los metodos cofrarMensaje y descifrarMensaje.
+    /**El menu donde se llaman los metodos cifrarMensaje y descifrarMensaje.*/
     public void menu(){
-        byte opcion=0;
+        byte opcion;
         System.out.println("Por favor digite la opcion: ");
         opcion= teclado.nextByte();
         switch(opcion){
@@ -34,7 +37,7 @@ public class CodigoCesar {
                 break;
         }
     }
-    // metodo donde se pide el mensaje y la clavr y se graban
+    /** metodo donde se pide el mensaje y la clave y se graban*/
     private void obtenerInformacion() {
         System.out.println("Por favor escriba un mensaje:");
         mensaje=teclado.next();
@@ -42,14 +45,16 @@ public class CodigoCesar {
         clave=teclado.nextInt();  
         obtenerMensaje();
     }
-    // metodo donde el mensaje obtenido se guarda en un vector letra
+    /** metodo donde el mensaje obtenido se guarda en un vector letra*/
     private void obtenerMensaje() {
         letra = new char[ mensaje.length()];
         for(int i = 0; i < mensaje.length(); i++){
             letra[i] = mensaje.charAt(i); // aqui se convierte el String a char
         }
     }
-    
+    /**
+     * metodo que se encarga de cifrar el mensaje escrito por el usuario
+     */
     private void  cifrarMensaje(){
         obtenerInformacion(); 
         obtenerMensaje();
@@ -58,13 +63,15 @@ public class CodigoCesar {
          for(int i=0; i<letra.length; i++){ // recorre la frase
              for(int j=0; j<alfabeto.length; j++){ // recorre el alfabeto
                  if(letra[i] == alfabeto[j]){
-                     nuevaPosicion = (clave + j) % alfabeto.length;                           
+                     nuevaPosicion = (clave%26 + j) % alfabeto.length;                           
                      System.out.print(alfabeto[nuevaPosicion] + " ");
                  }
              }
          }
     }
-    
+    /**
+     * metodo que se encarga de descifrar el mensaje escrito por el usuario
+     */
     private void descifrarMensaje(){
         obtenerInformacion();
         obtenerMensaje();
@@ -72,7 +79,7 @@ public class CodigoCesar {
         for(int i=0; i<letra.length; i++){
             for(int j=0; j<alfabeto.length; j++){
                 if(letra[i] == alfabeto[j]){
-                    nuevaPosicion= Math.abs(clave - j) % alfabeto.length;
+                    nuevaPosicion= Math.abs(clave%26 - j) % alfabeto.length;
                     System.out.print(alfabeto[nuevaPosicion] + " ");
                 }
             }
