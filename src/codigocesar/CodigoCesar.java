@@ -6,7 +6,7 @@ import java.util.Scanner;
  * 
  */
 public class CodigoCesar {
-    
+    int auxiliar;
     char []alfabeto={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
     Scanner teclado= new Scanner(System.in); 
     private int clave=0;    //Variables globales
@@ -76,13 +76,21 @@ public class CodigoCesar {
         obtenerInformacion();
         obtenerMensaje();
         int nuevaPosicion;
-        for(int i=0; i<letra.length; i++){
-            for(int j=0; j<alfabeto.length; j++){
-                if(letra[i] == alfabeto[j]){
-                    nuevaPosicion= Math.abs(clave%26 - j) % alfabeto.length;
-                    System.out.print(alfabeto[nuevaPosicion] + " ");
+       for (int i=0;i<letra.length;i++){
+                auxiliar=letra[i];
+                auxiliar=auxiliar-clave%26;
+                if (auxiliar<97){
+                    auxiliar=97-auxiliar;
+                    auxiliar=123-auxiliar;
+                }
+                for (int j=0;j<alfabeto.length;j++){
+                    if (auxiliar==alfabeto[j]){
+                        letra[i]=alfabeto[j];
+                    }
                 }
             }
-        }  
-    }
- }
+                for (int i=0;i<letra.length;i++){
+                    System.out.print(letra[i]);
+             }
+       }
+}
